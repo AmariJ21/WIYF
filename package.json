@@ -1,0 +1,17 @@
+{
+  "name": "wiyf",
+  "version": "1.0.0",
+  "description": "Your project description",
+  "main": "index.js",
+  "scripts": {
+    "build": "echo 'No build step defined for Spoonacular API setup.'",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "node-fetch": "^3.3.2",
+    "spoonacular": "^2.0.1"
+  },
+  "author": "Your Name",
+  "license": "ISC",
+  "type": "module"
+}

@@ -1,0 +1,60 @@
+/* General body styling */
+body {
+    background-color: chocolate;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+}
+
+/* Title Section */
+#title {
+    height: 200px;
+    width: 400px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -100px;
+    margin-left: -200px;
+    text-align: center;
+    color: white;
+    z-index: 10;
+}
+
+/* Class to move title to the top after search */
+.scrolled-top {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    background-color: black; /* Optional: to distinguish it */
+    z-index: 10;
+    margin: 0; /* Ensure no extra margin is added at the top */
+}
+
+/* Recipes section */
+#recipes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-start;
+    width: 100%;
+    max-width: 1200px;
+    margin-top: 220px; /* Initial margin-top for space below #title */
+}
+
+/* Recipe item styling */
+.recipe {
+    width: calc(33.33% - 10px);
+    box-sizing: border-box;
+    text-align: center;
+}
+
+/* Image styling within each recipe */
+.recipe img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
