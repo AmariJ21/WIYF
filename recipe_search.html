@@ -1,26 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Recipe Search</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
+const ingredientsInput = document.getElementById("ingredients");
+const searchButton = document.getElementById("search-button");
+const recipesContainer = document.getElementById("recipes");
+const titleDiv = document.getElementById("title");
 
-<body>
+const apiKey = "c4f27e279b35467893b948100b12a4ba"; // API key for Spoonacular API
 
+searchButton.addEventListener("click", async () => {
+  const ingredients = ingredientsInput.value.trim();
+  if (!ingredients) {
+    alert("Please enter ingredients!");
+    return;
+  }
 
-  <div id="title">
-    <h1>Search with Ingredients</h1>
-    <input type="text" id="ingredients" placeholder="Enter ingredients (comma separated)">
-    <button id="search-button">Search</button>
-  </div>
+  const url = `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredients}&number=10&ranking=1&ignorePantry=true&apiKey=${apiKey}`;
 
-  <div id="recipes"></div>
+  try {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error("Error fetching recipes");
 
+    const data = await response.json();
+    displayRecipes(data);
+  } catch (error) {
+    console.error(error);
+    alert("An error occurred. Please try again later.");
+  }
+});
 
-  <script src="script.mjs"></script> 
-</body>
-</html>
+// Function to fetch full recipe details to get the correct source URL
+async function fetchRecipeDetails(recipeId) {
+  const url = `https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${apiKey}`;
 
+  try {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error("Error fetching recipe details");
 
+    const data = await response.json();
+    return data.sourceUrl || "#"; // Return source URL, fallback to "#" if not available
+  } catch (error) {
+    console.error(error);
+    return "#"; // Return fallback URL if there's an error
+  }
+}
+
+async function displayRecipes(recipes) {
+  if (titleDiv) titleDiv.setAttribute("hidden", true);
+  else console.warn("Warning: Element with ID 'title' not found.");
+
+  recipesContainer.innerHTML = ""; // Clear previous results
+
+  for (const recipe of recipes) {
+    const sourceUrl = await fetchRecipeDetails(recipe.id); // Fetch correct recipe source
+
+    const recipeElement = document.createElement("div");
+    recipeElement.classList.add("recipe");
+
+    recipeElement.innerHTML = `
+      <h3><a href="${sourceUrl}" target="_blank">${recipe.title}</a></h3>
+      <a href="${sourceUrl}" target="_blank">
+        <img src="${recipe.image}" alt="${recipe.title}">
+      </a>
+      <p>Used Ingredients: ${recipe.usedIngredients.map(ingredient => ingredient.name).join(", ")}</p>
+      <p>Needed Ingredients: ${recipe.missedIngredients.map(ingredient => ingredient.name).join(", ")}</p>
+    `;
+
+    recipesContainer.appendChild(recipeElement);
+  }
+}
