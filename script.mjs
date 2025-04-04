@@ -3,7 +3,8 @@ const searchButton = document.getElementById("search-button");
 const recipesContainer = document.getElementById("recipes");
 const titleDiv = document.getElementById("title");
 
-const apiKey = "api_key"; // API key for Spoonacular API
+const apiKey = process.env.api_key;  // Accessing the environment variable
+ // API key for Spoonacular API
 
 searchButton.addEventListener("click", async () => {
   const ingredients = ingredientsInput.value.trim();
