@@ -1,15 +1,5 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "recipe_search.html",
-      "use": "@vercel/static"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/recipe_search.html"
-    }
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/recipe_search.html" }
   ]
 }
