@@ -1,14 +1,8 @@
 {
-    "builds": [
-      {
-        "src": "index.mjs",
-        "use": "@vercel/node"
-      }
-    ],
     "routes": [
       {
         "src": "/(.*)",
-        "dest": "index.mjs"
+        "dest": "/recipe_search.html"
       }
     ]
   }
