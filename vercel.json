@@ -1,13 +1,8 @@
 {
-    "routes": [
-      {
-        "src": "/api/(.*)",
-        "dest": "/pages/api/$1"
-      },
-      {
-        "src": "/(.*)",
-        "dest": "/recipe_search.html"
-      }
-    ]
-  }
-  
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/recipe_search.html"
+    }
+  ]
+}
