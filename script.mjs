@@ -4,7 +4,7 @@ const recipesContainer = document.getElementById("recipes");
 const titleDiv = document.getElementById("title");
 
 
-const apiKey = "3120446ce67d45968ed4e0da4c6acd7f"; // API key for Spoonacular API
+const apiKey = ""; // API key for Spoonacular API
 
 
 searchButton.addEventListener("click", async () => {
